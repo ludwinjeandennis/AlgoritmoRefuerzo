@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  flappy-rl:
+    build: .
+    ports:
+      - "8000:8000" # API WebSocket
+      - "3000:3000" # Frontend
+    volumes:
+      - ./models:/app/models
+      - ./logs:/app/logs
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: sh -c "python backend/api_server.py & python -m http.server 3000 --directory frontend"

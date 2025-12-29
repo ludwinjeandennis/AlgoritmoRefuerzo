@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Bird Deep Q-Learning</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🐦 Flappy Bird Deep Q-Learning</h1>
+            <p class="subtitle">Entrenamiento con Redes Neuronales Profundas</p>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Game Canvas -->
+            <div class="game-section">
+                <canvas id="gameCanvas" width="400" height="600"></canvas>
+                <div class="game-overlay" id="gameOverlay">
+                    <div class="game-over-message" id="gameOverMessage">GAME OVER</div>
+                </div>
+            </div>
+
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <div class="panel-section">
+                    <h2>Control</h2>
+                    <div class="button-group">
+                        <button id="startBtn" class="btn btn-primary">▶ Iniciar</button>
+                        <button id="pauseBtn" class="btn btn-secondary">⏸ Pausar</button>
+                    </div>
+                    <div class="button-group">
+                        <button id="saveBtn" class="btn btn-success">💾 Guardar</button>
+                        <button id="loadBtn" class="btn btn-info">📂 Cargar</button>
+                    </div>
+                    <div class="model-info">
+                        <span class="model-label">Modelo:</span>
+                        <span class="model-name" id="modelName">Nuevo Modelo</span>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h2>Estadísticas</h2>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Episodio</span>
+                            <span class="stat-value" id="episodeCount">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Score</span>
+                            <span class="stat-value" id="currentScore">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Best Score</span>
+                            <span class="stat-value highlight" id="bestScore">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Epsilon</span>
+                            <span class="stat-value" id="epsilon">1.000</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Loss</span>
+                            <span class="stat-value" id="loss">0.0000</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Q-Value</span>
+                            <span class="stat-value" id="qValue">0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h2>Gráficas</h2>
+
+                    <div class="chart-container">
+                        <h3>Score por Episodio</h3>
+                        <canvas id="scoreChart"></canvas>
+                    </div>
+
+                    <div class="chart-container">
+                        <h3>Pérdida de la Red</h3>
+                        <canvas id="lossChart"></canvas>
+                    </div>
+
+                    <div class="chart-container">
+                        <h3>Epsilon Decay</h3>
+                        <canvas id="epsilonChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <div class="status-indicator">
+                        <span class="status-dot" id="statusDot"></span>
+                        <span id="statusText">Desconectado</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Selección de Modelo -->
+    <div class="modal" id="modelModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📂 Seleccionar Modelo</h2>
+                <button class="modal-close" id="modalClose">✕</button>
+            </div>
+            <div class="modal-body">
+                <div id="modelList" class="model-list">
+                    <p class="loading">Cargando modelos...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>
